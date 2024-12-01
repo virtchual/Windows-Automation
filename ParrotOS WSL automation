@@ -1,5 +1,5 @@
 
-
+https://github.com/virtchual/Windows-Automation/blob/main/rdp_confirm_prompt.png
 
 The dialog shown is part of the Remote Desktop Connection in Windows. It prompts the user for confirmation to connect to a remote computer when the identity of the remote computer cannot be verified. This warning is typically seen if the server's certificate cannot be validated.
 
