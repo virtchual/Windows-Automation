@@ -1,1 +1,37 @@
 
+
+
+The dialog shown is part of the Remote Desktop Connection in Windows. It prompts the user for confirmation to connect to a remote computer when the identity of the remote computer cannot be verified. This warning is typically seen if the server's certificate cannot be validated.
+
+To automate the process and bypass this confirmation, you can use the following steps:
+
+### Use CMD or a Batch Script to Automatically Accept
+1. Open a text editor like Notepad and create a batch script (.bat file) with the following content:
+   ```cmd
+   mstsc /v:<remote_computer_name_or_IP> /admin
+   ```
+   Replace `<remote_computer_name_or_IP>` with the actual IP address or hostname of the remote computer. The `/admin` flag is optional and is used to connect as an administrator.
+
+2. Modify Registry Settings to Skip the Warning
+   To avoid this prompt, you can also configure the Remote Desktop client to trust the remote computer by tweaking the following registry key:
+
+   Open CMD as an administrator and execute:
+   ```cmd
+   reg add "HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client" /v AuthenticationLevelOverride /t REG_DWORD /d 0 /f
+   ```
+
+   - `AuthenticationLevelOverride` values:
+     - `0`: Always connect, even if authentication fails (bypasses the prompt).
+     - `1`: Warn before connecting if authentication fails.
+     - `2`: Do not connect if authentication fails.
+
+3. Suppress Warnings Using Group Policy
+   If you're in a managed environment, you can adjust settings through Group Policy:
+   - Open **gpedit.msc**.
+   - Navigate to `Computer Configuration > Administrative Templates > Windows Components > Remote Desktop Services > Remote Desktop Session Host > Security`.
+   - Enable the policy **"Require use of specific security layer for remote (RDP) connections"** and set it to **RDP**.
+   - Disable the policy **"Always prompt for password upon connection"**.
+
+These methods remove the confirmation dialog when connecting to remote computers. Always exercise caution and ensure that you're connecting to trusted systems.
+
+start Path\launcher && start cmdkey /generic:IP address /user:Username /pass:Password && start mstsc /f /v:IP address 
