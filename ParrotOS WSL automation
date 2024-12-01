@@ -1,7 +1,6 @@
 
-https://github.com/virtchual/Windows-Automation/blob/main/rdp_confirm_prompt.png
 
-The dialog shown is part of the Remote Desktop Connection in Windows. It prompts the user for confirmation to connect to a remote computer when the identity of the remote computer cannot be verified. This warning is typically seen if the server's certificate cannot be validated.
+The dialog(rdp_confirm_prompt.png) is part of the Remote Desktop Connection in Windows. It prompts the user for confirmation to connect to a remote computer when the identity of the remote computer cannot be verified. This warning is typically seen if the server's certificate cannot be validated.
 
 To automate the process and bypass this confirmation, you can use the following steps:
 
@@ -27,11 +26,28 @@ To automate the process and bypass this confirmation, you can use the following 
 
 3. Suppress Warnings Using Group Policy
    If you're in a managed environment, you can adjust settings through Group Policy:
-   - Open **gpedit.msc**.
+   - Open **gpedit.msc**. 
+      #gpedit.msc or Local Group Policy Editor is not available on Windows 10/11 Home Systems.To install it go to "Windows-Automation/install_gpedit"
    - Navigate to `Computer Configuration > Administrative Templates > Windows Components > Remote Desktop Services > Remote Desktop Session Host > Security`.
    - Enable the policy **"Require use of specific security layer for remote (RDP) connections"** and set it to **RDP**.
    - Disable the policy **"Always prompt for password upon connection"**.
 
 These methods remove the confirmation dialog when connecting to remote computers. Always exercise caution and ensure that you're connecting to trusted systems.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 start Path\launcher && start cmdkey /generic:IP address /user:Username /pass:Password && start mstsc /f /v:IP address 
